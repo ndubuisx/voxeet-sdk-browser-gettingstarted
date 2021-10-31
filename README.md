@@ -8,8 +8,6 @@ Here is how to set up and run this project locally.
 * Sign up for a free Dolby.io account [here](https://dashboard.dolby.io/).
 * Create a new application and save the Communications API key and secret.
 
-![How to Create Dolby.io App and Get API Key](https://imgur.com/VKvQRio.gif)
-
 ### Installation and Usage
 1. Clone this repo and change directory.
     ```sh
