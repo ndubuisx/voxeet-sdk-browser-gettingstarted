@@ -1,12 +1,30 @@
-# Dolby Interactivity APIs Browser SDK Getting Started app
+# Dolby.io Video Conference Application with Media Devices Controls
 
-This is the sample app from the browser app used in the
-[Getting Started](https://docs.dolby.io/interactivity/docs/create-a-basic-audio-conference-application) article. 
+## Getting Started
 
-You can find additional reference documentation here:
-- [JavaScript Reference](https://docs.dolby.io/interactivity/docs/js-client-sdk-voxeetsdk)
+Here is how to set up and run this project locally.
 
-## Running
+### Prerequisites
+* Sign up for a free Dolby.io account [here](https://dashboard.dolby.io/).
+* Create a new application and save the Communications API key and secret.
 
-See [this page](https://docs.dolby.io/interactivity/docs/create-a-basic-audio-conference-application#step-6-run-your-application)
-for instructions on how to run the app.
+![How to Create Dolby.io App and Get API Key](https://imgur.com/VKvQRio.gif)
+
+### Installation and Usage
+1. Clone this repo and change directory.
+    ```sh
+    $ git clone https://github.com/ndubuisx/voxeet-sdk-browser-gettingstarted
+
+    $ cd voxeet-sdk-browser-gettingstarted
+    ```
+    
+2. Replace this line in [client.js](./src/scripts/client.js) with your Dolby.io Communications API key and secret.
+    ```js
+    VoxeetSDK.initialize('customerKey', 'customerSecret');
+    ```
+    
+3. Start a simple http server to access the conference web application
+    ```sh
+    $ cd src && npx http-server -a localhost -p 8000 -c-1 -o ./
+
+4. Open the application in your web browser at [localhost:8000](http://localhost:8000).
