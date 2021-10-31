@@ -12,6 +12,12 @@ const initUI = () => {
   const stopScreenShareBtn = document.getElementById('stop-screenshare-btn');
   const startRecordingBtn = document.getElementById('start-recording-btn');
   const stopRecordingBtn = document.getElementById('stop-recording-btn');
+  const setVideoDeviceBtn = document.getElementById("set-video-device-btn");
+  const setInputAudioDeviceBtn = document.getElementById("set-input-audio-device-btn");
+  const setOutputAudioDeviceBtn = document.getElementById("set-output-audio-device-btn");
+  const videoDevices = document.getElementById("video-devices");
+  const inputAudioDevices = document.getElementById("input-audio-devices");
+  const outputAudioDevices = document.getElementById("output-audio-devices");
 
   // Update the login message with the name of the user
   nameMessage.innerHTML = `You are logged in as ${randomName}`;
@@ -61,6 +67,39 @@ const initUI = () => {
             startRecordingBtn.disabled = false;
           })
           .catch((err) => console.error(err));
+
+          // Load the Output Audio devices
+          VoxeetSDK.mediaDevice.enumerateAudioDevices("output")
+            .then(devices => {
+              devices.forEach(device => {
+                outputAudioDevices.append(new Option(device.label, device.deviceId));
+              });
+              
+              setOutputAudioDeviceBtn.disabled = false;
+            })
+            .catch(err => console.error(err));
+
+          // Load the Input Audio devices
+          VoxeetSDK.mediaDevice.enumerateAudioDevices("input")
+            .then(devices => {
+              devices.forEach(device => {
+                inputAudioDevices.append(new Option(device.label, device.deviceId));
+              });
+
+              setInputAudioDeviceBtn.disabled = false;
+            })
+            .catch(err => console.error(err));
+
+          // Load the Video devices
+          VoxeetSDK.mediaDevice.enumerateVideoDevices("input")
+            .then(devices => {
+              devices.forEach(device => {
+                videoDevices.append(new Option(device.label, device.deviceId));
+              });
+
+              setVideoDeviceBtn.disabled = false;
+            })
+            .catch(err => console.error(err));
       })
       .catch((err) => console.error(err));
   };
@@ -168,6 +207,23 @@ const initUI = () => {
       .catch((err) => console.error(err));
   };
 
+  setVideoDeviceBtn.onclick = async () => {
+    let selectedVideoDevice = videoDevices.options[videoDevices.selectedIndex];
+    alert(`You're video device has been set to: ${selectedVideoDevice.text}`);
+    await VoxeetSDK.mediaDevice.selectVideoInput(selectedVideoDevice.value);
+  }
+
+  setInputAudioDeviceBtn.onclick = async () => {
+      let selectedInputAudioDevice = inputAudioDevices.options[inputAudioDevices.selectedIndex];
+      alert(`You're input audio device (mic) has been set to: ${selectedInputAudioDevice.text}`)
+      await VoxeetSDK.mediaDevice.selectAudioInput(selectedInputAudioDevice.value);
+  }
+
+  setOutputAudioDeviceBtn.onclick = async () => {
+    let selectedOutputAudioDevice = outputAudioDevices.options[outputAudioDevices.selectedIndex];
+    alert(`You're output audio device (speaker) has been set to: ${selectedOutputAudioDevice.text}`)
+    await VoxeetSDK.mediaDevice.selectAudioOutput(selectedOutputAudioDevice.value);
+  }
 };
 
 // Add a video stream to the web page
