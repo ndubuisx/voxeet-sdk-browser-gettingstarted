@@ -31,6 +31,6 @@ Here is how to set up and run this project locally.
 ### Why Start a HTTP Server?
 Chrome has [deprecated](https://www.chromium.org/Home/chromium-security/deprecating-powerful-features-on-insecure-origins) support for accessing media devices through insecure origins (`http://`) and visiting a local web page through it's HTML file is not recognized as a secure origin (`https://`). However, you can test the Communications API's media devices feature through your machine's localhost since it is treated as a secure origin on Chrome and other Chromium browsers.
 
-Safari on macOS (as of [v15.0](https://developer.apple.com/documentation/safari-release-notes/safari-15-release-notes) still supports accessing media devices through insecure origins, so you can open the (index.html)[./src/index.html] file on there without starting a HTTP server for testing purposes.
+Safari on macOS (as of [v15.0](https://developer.apple.com/documentation/safari-release-notes/safari-15-release-notes)) still supports accessing media devices through insecure origins, so you can open the (index.html)[./src/index.html] file on there without starting a HTTP server for testing purposes.
 
 
